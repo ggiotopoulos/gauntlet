@@ -21,8 +21,8 @@ mkdir -p ../../dist
   echo "Inlined for single-file distribution. Fill every \`[PASTE: ...]\` slot before dispatch."
   echo
 
-  for f in agents/architect.md agents/skeptic.md agents/codebase-expert.md \
-           agents/pragmatist.md agents/domain-expert.md; do
+  for f in panel/architect.md panel/skeptic.md panel/codebase-expert.md \
+           panel/pragmatist.md panel/domain-expert.md; do
     echo; echo "---"; echo
     sed 's|^# |## |' "$f"
   done

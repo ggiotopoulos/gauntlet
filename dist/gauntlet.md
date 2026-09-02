@@ -25,6 +25,10 @@ one design doc. **You never write or edit source code.**
 Agent prompts are inlined at the bottom of this file under "## AGENT PROMPTS".
 fill its `[PASTE: ...]` slots and `{{INCLUDE ...}}` fragments. Do not paraphrase them.
 
+NOTE: this directory is `panel/`, not `agents/`. `agents/` is reserved by the plugin system —
+files placed there are auto-registered as invocable subagent types, and these are prompt
+templates, not agent definitions.
+
 Rationale for every design choice below is in the project README and docs/DESIGN.md.
 This file contains instructions only.
 
@@ -68,6 +72,11 @@ and scope boundaries into `## Locked Constraints`, injected into every agent pro
 
 Suggest a kebab-case doc name and confirm it. Output goes to `<out>/<name>.md`.
 
+**Verify `<out>` exists before dispatching anything.** It defaults to `docs/designs/`
+relative to the current directory, which frequently does not exist. If missing, say so and
+ask whether to create it or use a different path. Do not discover this after fifteen agent
+dispatches.
+
 ## STEP 1 — Context preparation
 
 1. **Architect** — the prompt, plus prior art from `<out>`, plus real project context
@@ -77,13 +86,17 @@ Suggest a kebab-case doc name and confirm it. Output goes to `<out>/<name>.md`.
    (required), `checklist.md` (required), `precedents.md` (optional), and list `sources/`.
    Missing a required file = malformed pack: name the missing file and stop. Check
    `schema_version` against this plugin's supported version; mismatch is an error, not a
-   warning. No pack: fall back to `--domain`, else UNSOURCED mode. **Degrade, never refuse.**
+   warning. No pack: fall back to `--domain`. **If neither a pack nor `--domain` is supplied**, infer the
+   domain from the problem statement, state the inference explicitly to the user before
+   dispatching, and pass it to the Domain Expert with instructions to mark every claim
+   UNSOURCED. Never leave the domain undefined — an expert with no stated domain produces
+   generic commentary that reads like expertise. **Degrade, never refuse.**
 4. **Skeptics A and B** — nothing. Context starvation is the design.
 5. **Pragmatist** — `git status`, open plans, and who is building this with what time.
 
 ## STEP 2 — Round 1: Architect proposes
 
-Dispatch `agents/architect.md` on **opus**.
+Dispatch `panel/architect.md` on **opus**.
 
 ### 2.5 Alignment check (Mode A only)
 Verify the proposal against every locked decision: file paths, API patterns, data models,
@@ -96,11 +109,11 @@ Six dispatches, all at once:
 
 | Agent | File | Model |
 |---|---|---|
-| Skeptic A | `agents/skeptic.md` | `skeptic_model_a` |
-| Skeptic B | `agents/skeptic.md` — **identical text** | `skeptic_model_b` |
-| Codebase Expert | `agents/codebase-expert.md` | opus |
-| Pragmatist | `agents/pragmatist.md` | opus |
-| Domain Expert | `agents/domain-expert.md` | opus |
+| Skeptic A | `panel/skeptic.md` | `skeptic_model_a` |
+| Skeptic B | `panel/skeptic.md` — **identical text** | `skeptic_model_b` |
+| Codebase Expert | `panel/codebase-expert.md` | opus |
+| Pragmatist | `panel/pragmatist.md` | opus |
+| Domain Expert | `panel/domain-expert.md` | opus |
 
 Mode A: prepend `## Locked Constraints` to all critic prompts, with: *these are not open
 for debate unless you can prove one impossible or in unresolvable conflict with another.
