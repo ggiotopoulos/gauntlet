@@ -16,6 +16,17 @@ Or try it without installing:
 claude --plugin-dir ./plugins/gauntlet
 ```
 
+**If you added this as a local marketplace while testing**, remove it before installing
+from GitHub — marketplace names are unique, and a local-path source and a GitHub source
+cannot share one:
+
+```
+/plugin uninstall gauntlet@gauntlet
+/plugin marketplace remove gauntlet
+/plugin marketplace add ggiotopoulos/gauntlet
+/plugin install gauntlet@gauntlet
+```
+
 ## Use
 
 ```
