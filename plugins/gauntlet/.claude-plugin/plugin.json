@@ -1,0 +1,6 @@
+{
+  "name": "gauntlet",
+  "description": "Multi-agent adversarial design review. Five critics, three fixed rounds, no early exit — with an audit trail and a trust report.",
+  "version": "0.1.0",
+  "license": "MIT"
+}
