@@ -77,6 +77,27 @@ relative to the current directory, which frequently does not exist. If missing, 
 ask whether to create it or use a different path. Do not discover this after fifteen agent
 dispatches.
 
+## STEP 0c — Pre-flight degradation report
+
+Before dispatching anything, tell the user what is already degraded and what it costs.
+A panel with a dead critic still produces a confident-looking document; the user must know
+that before the spend, not after.
+
+Check and report, in one short block:
+
+- **Domain**: pack loaded / `--domain` supplied / **inferred** (state the inference). If
+  inferred, say plainly that the Domain Expert is the weakest agent this run.
+- **Codebase**: is there anything to verify against? If the directory is empty or not a
+  repo, say so and name the consequence: *1 of 5 critics contributes near-zero.*
+- **Project state**: git status, in-flight plans, and who is building this with what time.
+  Missing? Pass the void honestly to the Pragmatist rather than inventing a project shape.
+- **Output directory**: exists or not (see STEP 0b).
+
+Then say how many agent dispatches this run will cost and let the user decide whether a
+degraded panel is worth it. Never open with an optimistic framing of a compromised run.
+
+---
+
 ## STEP 1 — Context preparation
 
 1. **Architect** — the prompt, plus prior art from `<out>`, plus real project context
