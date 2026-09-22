@@ -6,8 +6,8 @@ no early exit — with an audit trail and a report telling you which parts not t
 ## Install
 
 ```
-/plugin marketplace add <owner>/<repo>
-/plugin install gauntlet@<marketplace>
+/plugin marketplace add ggiotopoulos/gauntlet
+/plugin install gauntlet@gauntlet
 ```
 
 Or try it without installing:
@@ -70,6 +70,14 @@ The command knows nothing about your field. A pack supplies the expertise — se
 [`plugins/gauntlet/domains/_SCHEMA.md`](plugins/gauntlet/domains/_SCHEMA.md). `plugins/gauntlet/domains/personal-finance/` is a worked example.
 
 Packs are directories, not code. Publish the command; keep your pack.
+
+## Does it work?
+
+[`docs/EVALUATION.md`](docs/EVALUATION.md) — the methodology is pre-registered and the
+results are still mostly empty. It states which claims are anecdote, which are n=2
+hypotheses, which have never been exercised, and what result would falsify the design.
+A tool whose thesis is that unverified confidence is dangerous should not claim more
+than it has measured.
 
 ## Why it's built this way
 

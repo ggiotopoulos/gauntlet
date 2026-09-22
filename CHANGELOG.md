@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 — unreleased
+## 0.1.0 — 2026-09-22
 
 First packaged release. Restructured from a single 955-line command file.
 
@@ -18,6 +18,8 @@ First packaged release. Restructured from a single 955-line command file.
 - **Trust Report** at the top of every design doc and printed to the terminal: decisions
   ranked by reversibility, unverified claims, panel splits, parked concerns, panel
   integrity. It exposes unverified surface area; it does not claim to detect hallucinations.
+- Pre-flight degradation report: whatever is missing or unavailable is named before the
+  run starts, rather than discovered mid-run.
 
 **Domain packs**
 - Pluggable `domains/<name>/` — manifest, checklist, precedents, sources.
@@ -31,10 +33,9 @@ First packaged release. Restructured from a single 955-line command file.
 - Claude Code plugin layout; agent prompts read from `${CLAUDE_PLUGIN_ROOT}`.
 - Single-file `dist/gauntlet.md` build for install-free trial.
 - Rationale moved out of the runtime path into `docs/DESIGN.md`.
+- Command is project- and domain-agnostic; all domain knowledge lives in `domains/`.
 
 **Fixed**
 - `$ARGUMENTS.<field>` never parsed — frontmatter named arguments are documentation only.
   The orchestrator now parses the argument string itself and echoes the parse back.
 - Duplicate step numbering in final assembly.
-- Hard-coded project paths, stack references, and pharma-specific domain vocabulary
-  removed from the command.

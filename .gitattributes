@@ -1,0 +1,15 @@
+# Gauntlet ships Markdown prompt files, not code. Without these rules GitHub
+# reports the repo as 100% Shell: linguist classifies Markdown as prose and
+# excludes it, leaving the 38-line build script as the only counted file.
+
+# The plugin is the product. Count it as the repo's language.
+plugins/gauntlet/**/*.md linguist-detectable=true linguist-documentation=false
+
+# Design rationale is documentation, even inside the plugin.
+plugins/gauntlet/docs/**/*.md linguist-documentation=true
+
+# Tooling, not product.
+build.sh linguist-detectable=false
+
+# Generated single-file build: keep it out of language stats and diffs.
+dist/gauntlet.md linguist-generated=true
